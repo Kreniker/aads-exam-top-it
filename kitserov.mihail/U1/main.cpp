@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         return pair.second;
       }
     } else if (arg.compare(0, 4, "out:") == 0) {
-      std::pair< bool, int > pair = chooseStream< std::ostream, std::ofstream >(outputStream, outFile, outSet, arg, 4); 
+      std::pair< bool, int > pair = chooseStream< std::ostream, std::ofstream >(outputStream, outFile, outSet, arg, 4);
       if (!(pair.first)) {
         std::cerr << "Error in openning argument" << arg.substr(4) << "\n";
         return pair.second;

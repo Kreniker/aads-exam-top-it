@@ -44,7 +44,7 @@ namespace kitserov
         new_data[container.size] = Person{id, info};
       } catch (...) {
         delete[] new_data;
-        throw; 
+        throw;
       }
       delete[] container.data;
       container.data = new_data;

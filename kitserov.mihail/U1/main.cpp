@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
   for (size_t i = 1; i < argc; ++i) {
     std::string arg = argv[i];
     if (arg.compare(0, 3, "in:") == 0) {
-      std::pair< bool, int > pair = chooseStream< std::istream, std::ifstream >(inputStream, inFile, inSet, arg, 3); 
+      std::pair< bool, int > pair = chooseStream< std::istream, std::ifstream >(inputStream, inFile, inSet, arg, 3);
       if (!(pair.first)) {
         std::cerr << "Error in openning argument" << arg.substr(3) << "\n";
         return pair.second;

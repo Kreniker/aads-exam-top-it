@@ -73,6 +73,20 @@ namespace kitserov
     container.size_++;
     return true;
   }
+  template< class Container >
+  bool remove(Container& c, size_t id)
+  {
+    for (size_t i = 0; i < c.size_; ++i) {
+      if (c.data_[i] == id) {
+        for (size_t j = i; j < c.size_ - 1; ++j) {
+          c.data_[j] = c.data_[j + 1];
+        }
+        --c.size_;
+        return true;
+      }
+    }
+    return false;
+  }
   bool updatePerson(PersonsContainer& c, std::size_t id, const std::string& newDesc) {
     int idx = findIndex(c, id);
     if (idx == -1) {

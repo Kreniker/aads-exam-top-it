@@ -37,15 +37,18 @@ namespace kitserov
   {
     for (size_t i = 0; i < c.size_; ++i) {
       if (c.data_[i].id_ == id) {
-        return i;
+        return i; 
       }
     }
     return c.size_;
-}
+  }
 
   bool addPerson(PersonsContainer& container, size_t id, const std::string& info)
   {
     if (contains(container, id)) {
+      return false;
+    }
+    if (info.find_first_not_of(" \t") == std::string::npos) {
       return false;
     }
     if (container.size_ == container.capacity_) {
@@ -69,6 +72,18 @@ namespace kitserov
     container.size_++;
     return true;
   }
+  bool updatePerson(PersonsContainer& c, std::size_t id, const std::string& newDesc) {
+    int idx = findIndex(c, id);
+    if (idx == -1) {
+      return false;
+    }
+    if (newDesc.find_first_not_of(" \t") == std::string::npos) {
+      return false;
+    }
+    c.data_[idx].info_ = newDesc;
+    return true;
+  }
+
 }
 
 #endif

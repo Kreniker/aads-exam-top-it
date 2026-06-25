@@ -17,7 +17,7 @@ namespace kitserov
   {
     size_t pos = 0;
     const size_t len = line.size();
-    while (pos < len && line[pos] == ' ') {
+    while (pos < len && (line[pos] == ' ' || line[pos] == '\t')) {
       ++pos;
     }
     if (pos == len) {
@@ -33,13 +33,16 @@ namespace kitserov
     if (!hasDigit) {
       return false;
     }
-    while (pos < len && line[pos] == ' ') {
+    while (pos < len && (line[pos] == ' ' || line[pos] == '\t')) {
       ++pos;
     }
     if (pos < len) {
       info = line.substr(pos);
     } else {
       info.clear();
+    }
+    if (info.find_first_not_of(" \t") == std::string::npos) {
+      return false;
     }
     return true;
   }

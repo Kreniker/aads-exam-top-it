@@ -33,6 +33,16 @@ namespace kitserov
     }
     return false;
   }
+  size_t findIndex(const PersonsContainer& c, size_t id)
+  {
+    for (size_t i = 0; i < c.size_; ++i) {
+      if (c.data_[i].id_ == id) {
+        return i;
+      }
+    }
+    return c.size_;
+}
+
   bool addPerson(PersonsContainer& container, size_t id, const std::string& info)
   {
     if (contains(container, id)) {

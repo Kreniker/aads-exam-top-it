@@ -4,6 +4,7 @@
 #include <ostream>
 #include <person.hpp>
 #include <string>
+#include <utility>
 namespace kitserov
 {
   void printAll(const PersonsContainer& container, std::ostream& out)
@@ -43,17 +44,18 @@ namespace kitserov
     return true;
   }
   template< class Stream, class File >
-  bool chooseStream(Stream* stream, File& file, bool& set, std::string& arg, size_t substr)
+  std::pair< bool, int > chooseStream(Stream*& stream, File& file, bool& set, const std::string& arg, size_t substr)
   {
     if (set) {
-      return false;
+      return {false, 1};
     }
     file.open(arg.substr(substr));
     if (!file.is_open()) {
-      return false;
+      return {false, 2};
     }
     stream = &file;
     set = true;
+    return {true, 0};
   }
 }
 

@@ -3,6 +3,7 @@
 #include <person.hpp>
 #include <utils.hpp>
 #include <utility>
+#include <string>
 int main(int argc, char* argv[])
 {
   using namespace kitserov;
@@ -38,6 +39,31 @@ int main(int argc, char* argv[])
   PersonsContainer storage{nullptr, 0, 0};
 
   std::string line;
-  size_t totalLines = 0;
-
+  size_t total = 0;
+  size_t succs = 0;
+  size_t ignored = 0;
+  try {
+    while (std::getline(*inputStream, line)) {
+      ++total;
+      size_t id = 0;
+      std::string info;
+      if (readLine(line, id, info)) {
+        if (addPerson(storage, id, info)) {
+          ++succs;
+        } else {
+          ++ignored;
+        }
+      } else {
+        ++ignored;
+      }
+    }
+  } catch (const std::bad_alloc&) {
+    std::cerr << "Bad alloc memory\n";
+    destroy(storage);
+    return 2;
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << "\n";
+    destroy(storage);
+    return 2;
+  }
 }

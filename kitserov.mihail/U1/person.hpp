@@ -16,6 +16,10 @@ namespace kitserov
     size_t size;
     size_t capacity;
   };
+  void destroy(PersonsContainer storage)
+  {
+    delete[] storage.data;
+  }
   bool contains(const PersonsContainer& container, size_t id)
   {
     for (size_t i = 0; i < container.size; ++i) {

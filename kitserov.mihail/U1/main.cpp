@@ -13,11 +13,11 @@ int main(int argc, char* argv[])
   std::ostream* outputStream = &std::cout;
   if (argc > 3) {
     std::cerr << "Too many arcs\n";
-    return 1;
+    return 0;
   }
   bool inSet = false;
   bool outSet = false;
-  for (size_t i = 1; i < argc; ++i) {
+  for (int i = 1; i < argc; ++i) {
     std::string arg = argv[i];
     if (arg.compare(0, 3, "in:") == 0) {
       std::pair< bool, int > pair = chooseStream< std::istream, std::ifstream >(inputStream, inFile, inSet, arg, 3);

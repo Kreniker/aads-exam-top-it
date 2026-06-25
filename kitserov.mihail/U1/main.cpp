@@ -39,12 +39,10 @@ int main(int argc, char* argv[])
   PersonsContainer storage{nullptr, 0, 0};
 
   std::string line;
-  size_t total = 0;
   size_t succs = 0;
   size_t ignored = 0;
   try {
     while (std::getline(*inputStream, line)) {
-      ++total;
       size_t id = 0;
       std::string info;
       if (readLine(line, id, info)) {
@@ -66,4 +64,8 @@ int main(int argc, char* argv[])
     destroy(storage);
     return 2;
   }
+  printAll(storage, *outputStream);
+  std::cerr << succs << " " << ignored << "\n";
+  destroy(storage);
+  return 0;
 }
